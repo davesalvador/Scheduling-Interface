@@ -1,16 +1,87 @@
-# React + Vite
+# Weekly Scheduler
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A weekly shift scheduling interface built with React and Vite.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
 
-## React Compiler
+- Node.js 18+
+- pnpm
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+If you don't have pnpm installed:
+```bash
+npm install -g pnpm
+```
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start local dev server |
+| `pnpm build` | Build for production |
+| `pnpm preview` | Preview the production build |
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── AddShiftForm.jsx   # Inline form for adding a shift to a day
+│   ├── DayColumn.jsx      # Single day column — header, shifts, add button
+│   ├── ShiftCard.jsx      # Individual shift pill with time and duration
+│   ├── Toast.jsx          # Notification stack (bottom-right)
+│   └── WeekNav.jsx        # Prev / Next week navigation bar
+│
+├── constants/
+│   └── index.js           # Static values: day names, month names, DAYS_IN_WEEK
+│
+├── hooks/
+│   ├── useScheduler.js    # All scheduler state and actions (shifts, week offset)
+│   └── useToast.js        # Toast notification queue with auto-dismiss
+│
+├── styles/
+│   ├── global.css         # Global reset, CSS classes, hover states, responsive grid
+│   └── tokens.js          # Shared JS style objects used in inline styles
+│
+├── utils/
+│   ├── dateUtils.js       # Pure date functions: week calculation, formatting, keys
+│   └── shiftUtils.js      # Pure shift functions: validation, overlap, sort, format
+│
+├── App.jsx                # Root component — wires hooks to components
+└── main.jsx               # React entry point — mounts app, imports global CSS
+```
+
+---
+
+## Features
+
+- View a 7-day week (Monday – Sunday)
+- Navigate between weeks with Prev / Next
+- Add multiple shifts per day with start and end time
+- Shifts display in chronological order
+- Overlap detection — cannot add conflicting shifts
+- Today's date is highlighted
+- Fully responsive — 7 cols → 4 → 2 → 1 on smaller screens
+- Toast notifications for validation errors
+
+---
+
+## Why tokens.js exists
+
+Components use inline `style={{}}` objects which are plain JavaScript and cannot read CSS variables like `var(--color-background)`. `tokens.js` exports shared style objects so colors and spacing stay consistent across components without repeating raw values. If the project migrates to CSS classNames, `tokens.js` can be deleted and replaced with CSS variables in `global.css`.
