@@ -1,9 +1,7 @@
 import { colors } from "../styles/tokens";
 
-/** Single toast item */
 function ToastItem({ toast, onDismiss }) {
   const isError = toast.type === "error";
-  const isSuccess = toast.type === "success";
 
   return (
     <div
@@ -26,15 +24,10 @@ function ToastItem({ toast, onDismiss }) {
         animation: "toastIn 0.2s ease",
       }}
     >
-      {/* Icon */}
       <span style={{ fontSize: 15, flexShrink: 0, marginTop: 1 }}>
         {isError ? "✕" : "✓"}
       </span>
-
-      {/* Message */}
       <span style={{ flex: 1, lineHeight: 1.4 }}>{toast.message}</span>
-
-      {/* Dismiss */}
       <button
         onClick={() => onDismiss(toast.id)}
         aria-label="Dismiss"
@@ -57,7 +50,6 @@ function ToastItem({ toast, onDismiss }) {
   );
 }
 
-/** Toast stack — renders in bottom-right corner */
 export default function Toast({ toasts, onDismiss }) {
   if (toasts.length === 0) return null;
 

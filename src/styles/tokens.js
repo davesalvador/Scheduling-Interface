@@ -1,27 +1,20 @@
-
 export const colors = {
-  background:   "#09090b",   // zinc-950 — page bg
-  surface:      "#18181b",   // zinc-900 — card bg
-  surfaceHover: "#27272a",   // zinc-800
-  elevated:     "#3f3f46",   // zinc-700 — inputs, active states
-
-  border:       "#27272a",   // zinc-800
-  borderFocus:  "#71717a",   // zinc-500
-
-  textPrimary:  "#fafafa",   // zinc-50
-  textMuted:    "#71717a",   // zinc-500
-  textSubtle:   "#52525b",   // zinc-600
-
+  background:   "#09090b",
+  surface:      "#18181b",
+  surfaceHover: "#27272a",
+  elevated:     "#3f3f46",
+  border:       "#27272a",
+  borderFocus:  "#71717a",
+  textPrimary:  "#fafafa",
+  textMuted:    "#71717a",
+  textSubtle:   "#52525b",
   accent:       "#ffffff",
   accentText:   "#09090b",
-
-  danger:       "#f87171",   // red-400
-  dangerBg:     "#450a0a",   // red-950
-  dangerBorder: "#7f1d1d",   // red-900
-  success:      "#4ade80",   // green-400
+  danger:       "#f87171",
+  dangerBg:     "#450a0a",
+  dangerBorder: "#7f1d1d",
+  success:      "#4ade80",
 };
-
-// ── Reusable style objects ────────────────────────────────────
 
 export const btnBase = {
   border: "none",
@@ -35,32 +28,13 @@ export const btnBase = {
   lineHeight: 1,
 };
 
-export const btnPrimary = {
-  ...btnBase,
-  background: colors.accent,
-  color: colors.accentText,
-};
-
-export const btnGhost = {
-  ...btnBase,
-  background: "transparent",
-  border: `1px solid ${colors.border}`,
-  color: colors.textPrimary,
-};
-
-export const btnGhostSmall = {
-  ...btnGhost,
-  padding: "6px 12px",
-  fontSize: 12,
-};
-
 export const inputStyle = {
   width: "100%",
   padding: "7px 10px",
   borderRadius: 6,
-  border: `1px solid ${colors.border}`,
-  background: colors.surface,
-  color: colors.textPrimary,
+  border: "1px solid #27272a",
+  background: "#18181b",
+  color: "#fafafa",
   fontSize: 13,
   fontWeight: 400,
   outline: "none",
@@ -72,7 +46,7 @@ export const labelStyle = {
   display: "block",
   fontSize: 11,
   fontWeight: 500,
-  color: colors.textMuted,
+  color: "#71717a",
   marginBottom: 4,
   letterSpacing: "0.03em",
   textTransform: "uppercase",

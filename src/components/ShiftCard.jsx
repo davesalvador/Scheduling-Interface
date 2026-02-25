@@ -1,21 +1,19 @@
 import { formatTime } from "../utils/shiftUtils";
 import { colors } from "../styles/tokens";
 
-/** Deterministic accent color based on start hour — adds visual variety */
 function getAccentColor(startTime) {
   const accents = [
-    { bar: "#6366f1", bg: "rgba(99,102,241,0.08)", text: "#818cf8" }, // indigo
-    { bar: "#ec4899", bg: "rgba(236,72,153,0.08)", text: "#f472b6" }, // pink
-    { bar: "#14b8a6", bg: "rgba(20,184,166,0.08)", text: "#2dd4bf" }, // teal
-    { bar: "#f59e0b", bg: "rgba(245,158,11,0.08)", text: "#fbbf24" }, // amber
-    { bar: "#8b5cf6", bg: "rgba(139,92,246,0.08)", text: "#a78bfa" }, // violet
-    { bar: "#10b981", bg: "rgba(16,185,129,0.08)", text: "#34d399" }, // emerald
+    { bar: "#6366f1", bg: "rgba(99,102,241,0.08)",  text: "#818cf8" },
+    { bar: "#ec4899", bg: "rgba(236,72,153,0.08)",  text: "#f472b6" },
+    { bar: "#14b8a6", bg: "rgba(20,184,166,0.08)",  text: "#2dd4bf" },
+    { bar: "#f59e0b", bg: "rgba(245,158,11,0.08)",  text: "#fbbf24" },
+    { bar: "#8b5cf6", bg: "rgba(139,92,246,0.08)",  text: "#a78bfa" },
+    { bar: "#10b981", bg: "rgba(16,185,129,0.08)",  text: "#34d399" },
   ];
   const [h] = startTime.split(":").map(Number);
   return accents[h % accents.length];
 }
 
-/** "3h 30m" duration label */
 function getDuration(startTime, endTime) {
   const [sh, sm] = startTime.split(":").map(Number);
   const [eh, em] = endTime.split(":").map(Number);
@@ -28,7 +26,7 @@ function getDuration(startTime, endTime) {
 }
 
 export default function ShiftCard({ shift }) {
-  const accent = getAccentColor(shift.startTime);
+  const accent   = getAccentColor(shift.startTime);
   const duration = getDuration(shift.startTime, shift.endTime);
 
   return (
@@ -54,7 +52,6 @@ export default function ShiftCard({ shift }) {
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      {/* Left accent bar */}
       <div
         style={{
           width: 3,
@@ -63,42 +60,16 @@ export default function ShiftCard({ shift }) {
           alignSelf: "stretch",
         }}
       />
-
-      {/* Content */}
       <div style={{ padding: "8px 10px 8px 0", flex: 1 }}>
-        {/* Time row */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            marginBottom: 3,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: colors.textPrimary,
-              letterSpacing: "-0.01em",
-            }}
-          >
+        <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 3 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: colors.textPrimary, letterSpacing: "-0.01em" }}>
             {formatTime(shift.startTime)}
           </span>
           <span style={{ fontSize: 10, color: colors.textSubtle }}>→</span>
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: colors.textPrimary,
-              letterSpacing: "-0.01em",
-            }}
-          >
+          <span style={{ fontSize: 12, fontWeight: 600, color: colors.textPrimary, letterSpacing: "-0.01em" }}>
             {formatTime(shift.endTime)}
           </span>
         </div>
-
-        {/* Duration pill */}
         <span
           style={{
             display: "inline-block",

@@ -1,12 +1,6 @@
 import { colors } from "../styles/tokens";
 
-export default function WeekNav({
-  weekLabel,
-  isCurrentWeek,
-  onPrev,
-  onNext,
-  onGoToCurrent,
-}) {
+export default function WeekNav({ weekLabel, isCurrentWeek, onPrev, onNext, onGoToCurrent }) {
   return (
     <nav
       aria-label="Week navigation"

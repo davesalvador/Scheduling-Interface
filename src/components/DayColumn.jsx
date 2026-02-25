@@ -1,55 +1,33 @@
 import { useState, useMemo } from "react";
-import ShiftCard from "./ShiftCard";
+import ShiftCard    from "./ShiftCard";
 import AddShiftForm from "./AddShiftForm";
-import { toDateKey, getDayMeta } from "../utils/dateUtils";
+import { toDateKey, getDayMeta }     from "../utils/dateUtils";
 import { sortShiftsChronologically } from "../utils/shiftUtils";
-import { colors } from "../styles/tokens";
+import { colors }                    from "../styles/tokens";
 
-/**
- * @param {{
- *   date:          Date,
- *   shifts:        Record<string, Shift[]>,
- *   onAddShift:    (dateKey, start, end) => void,
- *   isToday:       boolean,
- *   onToastError:  (msg: string) => void,
- * }} props
- */
-export default function DayColumn({
-  date,
-  shifts,
-  onAddShift,
-  isToday,
-  onToastError,
-}) {
+export default function DayColumn({ date, shifts, onAddShift, isToday, onToastError }) {
   const [formOpen, setFormOpen] = useState(false);
 
-  const dateKey = toDateKey(date);
+  const dateKey                        = toDateKey(date);
   const { dayName, dayNum, monthName } = getDayMeta(date);
 
   const sortedShifts = useMemo(
     () => sortShiftsChronologically(shifts[dateKey] ?? []),
-    [shifts, dateKey],
+    [shifts, dateKey]
   );
 
   return (
     <div
       style={{
-        flex: "1 1 120px",
-        minWidth: 110,
         background: colors.surface,
         border: `1px solid ${isToday ? colors.accent : colors.border}`,
         borderRadius: 8,
         padding: "12px 10px 10px",
         display: "flex",
         flexDirection: "column",
-        transition: "border-color 0.15s",
       }}
     >
-      {/* ── Day Header ──────────────────────────────────────── */}
-      <div
-        style={{ textAlign: "center", marginBottom: 12, userSelect: "none" }}
-      >
-        {/* Day name */}
+      <div style={{ textAlign: "center", marginBottom: 12, userSelect: "none" }}>
         <div
           style={{
             fontSize: 10,
@@ -62,8 +40,6 @@ export default function DayColumn({
         >
           {dayName}
         </div>
-
-        {/* Date circle */}
         <div
           style={{
             width: 32,
@@ -86,17 +62,13 @@ export default function DayColumn({
             {dayNum}
           </span>
         </div>
-
-        {/* Month */}
         <div style={{ fontSize: 10, color: colors.textSubtle, marginTop: 3 }}>
           {monthName}
         </div>
       </div>
 
-      {/* ── Divider ─────────────────────────────────────────── */}
       <div style={{ height: 1, background: colors.border, marginBottom: 10 }} />
 
-      {/* ── Shift List ──────────────────────────────────────── */}
       <div style={{ flex: 1 }}>
         {sortedShifts.length === 0 && !formOpen && (
           <p
@@ -116,7 +88,6 @@ export default function DayColumn({
         ))}
       </div>
 
-      {/* ── Add Shift Toggle / Form ──────────────────────────── */}
       {formOpen ? (
         <AddShiftForm
           dateKey={dateKey}
@@ -128,7 +99,7 @@ export default function DayColumn({
       ) : (
         <button
           onClick={() => setFormOpen(true)}
-          aria-label={`Add shift — ${dayName} ${dayNum} ${monthName}`}
+          aria-label={`Add shift on ${dayName} ${dayNum}`}
           className="add-shift-btn"
         >
           + Add shift
